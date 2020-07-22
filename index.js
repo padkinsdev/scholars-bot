@@ -23,7 +23,6 @@ client.on("ready", () => {
     return cacheMessages();
   })
   .then((messageList) => {
-    //console.log(messageList.size);
     if (messageList.size == 0){
       let embed = new discord.MessageEmbed()
       .setDescription("Welcome to the unofficial College Park Scholars Discord server! React to this message using the guide below in order to claim the role associated with your specific program.\n\n:paintbrush: -> Arts\n:moneybag: -> Business, Society, and the Economy\n:evergreen_tree: -> Environgment, Technology, and the Economy\n:medical_symbol: -> Global Public Health\n:airplane: -> International Studies\n:scales: -> Justice and Legal Thought\n:otter: -> Life Sciences\n:film_frames: -> Media, Self, and Society\n:microphone2: -> Public Leadership\n:ringed_planet: -> Science, Discovery, and the Universe\n:microscope: -> Science and Global Change\n:computer: -> Science, Technology, and Society")
