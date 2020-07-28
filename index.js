@@ -54,7 +54,16 @@ client.on('message', (message) => {
   if (message.author.bot){
     return false;
   } else if (message.content.startsWith(prefix)){
-    cmdhandle.resolve_command(message);
+    let func = cmdhandle.resolve_command(message);
+    if (typeof func == "function"){
+      if (func.length == 0){
+        return true;
+      } else {
+        func(message);
+      }
+    } else {
+      console.log(`Non-function returned from cmdhandle.resolve_command: ${func}`);
+    }
   }
 });
 

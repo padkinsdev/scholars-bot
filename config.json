@@ -14,9 +14,53 @@
     "1f52c" : "732279122654527600",
     "1f4bb" : "732279246248083537"
   },
+  "keyed_roles": {
+    "Arts": "732277478256803932",
+    "Business, Society and the Economy": "732277696230588438",
+    "Environment, Technology and Economy": "732277813272510476",
+    "Global Public Health": "732277992944041984",
+    "International Studies": "732278076909813863",
+    "Justice and Legal Thought": "732278177270988800",
+    "Life Sciences": "732278249836642366",
+    "Media, Self and Society": "732278622144037004",
+    "Public Leadership": "732278716385984572",
+    "Science, Discovery and the Universe": "732278806492086314",
+    "Science and Global Change": "732279122654527600",
+    "Science, Technology and Society": "732279246248083537"
+  },
+  "role_aliases": {
+    "arts": "Arts",
+    "bse": "Business, Society and the Economy",
+    "ete": "Environment, Technology and Economy",
+    "gph": "Global Public Health",
+    "is": "International Studies",
+    "jlt": "Justice and Legal Thought",
+    "ls": "Life Sciences",
+    "mss": "Media, Self and Society",
+    "pl": "Public Leadership",
+    "sdu": "Science, Discovery and the Universe",
+    "sgc": "Science and Global Change",
+    "sts": "Science, Technology and Society"
+  },
   "welcomeChannel": "732751358041784320",
   "reactChannel": "732286498702884865",
   "confirmChannel": "735292298216210553",
   "msgCacheSize": 100,
-  "embedColor": "0xf26861"
+  "embedColor": "0xf26861",
+  "exclusive": [
+    [
+      "732277478256803932",
+      "732277696230588438",
+      "732277813272510476",
+      "732277992944041984",
+      "732278076909813863",
+      "732278177270988800",
+      "732278249836642366",
+      "732278622144037004",
+      "732278716385984572",
+      "732278806492086314",
+      "732279122654527600",
+      "732279246248083537"
+    ]
+  ]
 }
