@@ -1,19 +1,31 @@
 const config = require('./config.json');
 const discord = require('discord.js');
+const utils = require('./utils');
 
 function assign_role(message){
   let parts = argFlagSeparate(message.content);
   let failed = ""; // list of keywords that don't correspond to claimable roles
   parts.args.forEach((roleName, index) => {
+    let conflict;
     if (config["keyed_roles"][config["role_aliases"][roleName]]){
       //console.log("HERE");
       message.guild.roles.fetch(config["keyed_roles"][config["role_aliases"][roleName]])
       .then((role) => {
-        return message.member.roles.add(role);
+        let exclusive = utils.exclusive(message.member, role, message.guild);
+        if (exclusive.pass){
+          return message.member.roles.add(role);
+        } else {
+          conflict = exclusive.conflicting_role;
+          throw "not exclusive";
+        }
       })
       .catch((reason) => {
-        console.error(`Error while assigning role assigning role for ${roleName}:\n${reason}`);
-        failed = failed + roleName + "\n";
+        if (reason == "not exclusive"){
+          utils.getConfirmChannelFromMember(message.member).send(message.member.toString() + ", role " + conflict + " is not compatible with one or more other roles you have. Please get rid of those roles before claiming the mentioned role.");
+        } else {
+          console.error(`Error while assigning role assigning role for ${roleName}:\n${reason}`);
+          failed = failed + roleName + "\n";
+        }
       });
     } else {
       failed = `${failed} ${roleName}\n`;
@@ -110,7 +122,7 @@ function say_hello(message){
 
 var commands = {
   hello: say_hello,
-  assign: assign_role,
+  claim: assign_role,
   remove: remove_role,
   list: list_roles
 }

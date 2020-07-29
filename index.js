@@ -71,13 +71,20 @@ client.on('messageReactionAdd', (reaction, user) => {
   //console.log(reaction.message.channel.messages.cache);
   //console.log(reaction.emoji.name.codePointAt(0));
   let emoji = reaction.emoji.name.codePointAt(0).toString(16);
+  let conflict;
   //console.log(emoji);
   if (config.role_id.hasOwnProperty(emoji) && !(user.bot) && reaction.message.channel.id == config["reactChannel"]){
     let roleToAssign = config.role_id[emoji];
     let guild = reaction.message.guild;
     guild.members.fetch(user)
     .then((member) => {
-      return member.roles.add(roleToAssign);
+      let exclusive = utils.exclusive(member, roleToAssign, guild);
+      conflict = exclusive.conflicting_role;
+      if (exclusive.pass){
+        return member.roles.add(roleToAssign);
+      } else {
+        throw "not exclusive"
+      }
     })
     .then((member) => {
       utils.getConfirmChannelFromReaction(reaction).send(user.toString() + ", successfully assigned role!").catch((reason) => {
@@ -85,10 +92,16 @@ client.on('messageReactionAdd', (reaction, user) => {
       });
     })
     .catch((reason) => {
-      console.log("Error when assigning role:\n" + reason);
-      utils.getConfirmChannelFromReaction(reaction).send(user.toString() + ", I couldn't assign the requested role. Try it once more?").catch((reason) => {
-        console.log("Failed to send role assign error message:\n"+reason);
-      });
+      if (reason != "not exclusive"){
+        console.log("Error when assigning role:\n" + reason);
+        utils.getConfirmChannelFromReaction(reaction).send(user.toString() + ", I couldn't assign the requested role. Try it once more?").catch((reason) => {
+          console.log("Failed to send role assign error message:\n"+reason);
+        });
+      } else {
+        utils.getConfirmChannelFromReaction(reaction).send(user.toString() + ", the role you are trying to get is not compatible with the following role(s):\n"+conflict+"\n\nPlease get rid of the conflicting role if you want to claim the role you just tried to claim.").catch((reason) => {
+          console.log("Failed to send 'not exclusive' role assign error message:\n"+reason);
+        });
+      }
     });
   } else {
     // keeps users from clogging up the message with random reactions
