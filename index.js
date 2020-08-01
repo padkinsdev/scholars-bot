@@ -145,6 +145,10 @@ client.on('guildMemberAdd', (member) => {
     .setTitle(`Welcome, ${member.user.username}`)
     .setDescription("Welcome to the unofficial College Park Scholars Discord server, "+member.toString()+". Be sure to check out <#"+config['reactChannel']+"> to claim the role associated with your College Park Scholars program!");
     utils.getWelcomeChannelFromMember(member).send(embed);
+    member.roles.add(config["genericRole"]) // this is the @Student role
+    .catch((reason) => {
+      console.log("Failed to auto-assign generic role:"+reason);
+    });
   } else {
     let embed = new discord.MessageEmbed()
     .setThumbnail(member.user.avatarURL())
