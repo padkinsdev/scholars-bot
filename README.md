@@ -1,5 +1,8 @@
 ![Cassiopeia's Profile Picture](https://images-ext-1.discordapp.net/external/_bJmVhKqmhh9FvF4zoHjKyzywV3em3AF8omj-Sfe6QA/https/cdn.discordapp.com/avatars/732727661238943824/2ec8ffd42e2becae83e388579159cfbd.webp)
 # scholars-bot, aka Cassiopeia
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/ff6d5b8ae3fa4457a6c2664831bd3cb0)](https://app.codacy.com/manual/padkinsdev/scholars-bot?utm_source=github.com&utm_medium=referral&utm_content=padkinsdev/scholars-bot&utm_campaign=Badge_Grade_Dashboard)
+
 Yet another Discord bot written with discord.js and used to handle reaction roles for the unofficial College Park Scholars Discord server I created.
 
 ### That's a nice profile picture. Did you draw it?
