@@ -164,14 +164,14 @@ client.on('guildMemberRemove', (member) => {
     let embed = new discord.MessageEmbed()
     .setThumbnail(member.user.avatarURL())
     .setColor(config["embedColor"])
-    .setTitle(`Welcome, ${member.user.username}`)
+    .setTitle(`Goodbye, ${member.user.username}`)
     .setDescription(`${member} has left. They will be missed.`);
     utils.getWelcomeChannelFromMember(member).send(embed);
   } else {
     let embed = new discord.MessageEmbed()
     .setThumbnail(member.user.avatarURL())
     .setColor(config["embedColor"])
-    .setTitle(`Welcome, ${member.user.username}`)
+    .setTitle(`Goodbye, ${member.user.username}`)
     .setDescription(`${member} has left. Keep this a secret, guys, but they were kind of cute :flushed: :point_right: :point_left:`);
     utils.getWelcomeChannelFromMember(member).send(embed);
   }
